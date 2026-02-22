@@ -23,9 +23,37 @@ public class GuestBook extends HttpServlet{
 	public void init() {
 		if(entries.isEmpty()) {
 			entries.add(new GuestBookEntry(1, "John", "Hello!"));
-			entries.add(new GuestBookEntry(1, "John", "Hello Again!"));
+			entries.add(new GuestBookEntry(2, "John", "Hello Again!"));
 		}
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.println("<html><head><title>GuestBook</title></head><body>");
+		out.println("<h1>Guest Book</h1>");
+		
+		//Start Table Structure
+		out.println("<table style= 'border-collapse: collapse;' border='1'>");
+		out.println("<tr><th>Name</th><th>Message</th><th>Edit | Delete</th></tr>");
+		
+		for(GuestBookEntry entry : entries) {
+			out.println("<tr>");
+			out.println("<td>" + entry.getName() + "</td>");
+			out.println("<td>" + entry.getMessage() + "</td>");
+			
+			out.println("<td>");
+			
+			out.println("<a href='EditEntry?id=" + entry.getId() + "'>Edit</a> | ");
+			out.println("<a href='DeleteEntry?id=" + entry.getId() + "'>Delete</a>");
+            out.println("</td>");
+            
+            out.println("</tr>");
+		}
+		out.println("</table>");
+		
+		out.println("<br><a href='AddComment'>Add Comment</a>");
+		out.println("</body></html>");
+	}
 	
 }
