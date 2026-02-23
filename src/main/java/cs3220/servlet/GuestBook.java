@@ -33,7 +33,6 @@ public class GuestBook extends HttpServlet{
 		out.println("<html><head><title>GuestBook</title></head><body>");
 		out.println("<h1>Guest Book</h1>");
 		
-		//Start Table Structure
 		out.println("<table style= 'border-collapse: collapse;' border='1'>");
 		out.println("<tr><th>Name</th><th>Message</th><th>Edit | Delete</th></tr>");
 		
